@@ -106,7 +106,7 @@ async def play(ctx):
     voice_channel = server.voice_client
 
     async with ctx.typing():
-        player = await YTDLSource.from_url(queue[0], loop=client.loop)
+        player = await YTDLSource.from_url(queue[0], loop=bot.loop)
         voice_channel.play(player, after=lambda e: print('Player error: %s' % e) if e else None)
 
     await ctx.send('**Now playing:** {}'.format(player.title))
