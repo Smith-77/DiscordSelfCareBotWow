@@ -1,5 +1,5 @@
 # Self Care Discord Bot
-This is a Discord bot to promote wellness and self-care in any given Discord channel
+This is a Discord bot to promote wellness and self-care in any given Discord channel. Use this link (https://discord.com/api/oauth2/authorize?client_id=805124602719633498&permissions=1567808&scope=bot) to try to add the bot to your Discord guild. (The bot is not currently always running on a server - coming soon!)
 # Mental Health
 Sends encouraging messages
 Sends GIFS
