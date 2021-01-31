@@ -29,15 +29,27 @@ async def on_message(message):
     if np.contains_depression_traces(message.content.lower()):
         response = np.get_depression_response()
         await message.channel.send(response)
-    #if np.is_overtly_negative(message.content.lower()):
-    #    response = np.get_negative_response() # Really it gets a cheery response 
-    #    await message.channel.send(response)
+    if np.contains_school_traces(message.content.lower()):
+        await message.channel.send("What topic?")
+    if np.contains_schooltopic_traces(message.content.lower()):
+        await message.channel.send('Based on your request, here is a helpful Khan Academy video: https://www.khanacademy.org/math/trigonometry%27')
+    if np.contains_jobfinding_traces(message.content.lower()):
+        await message.channel.send("What kind of job are you looking for? What kind of salary? How far from you?")
+    if np.contains_jobarea_traces(message.content.lower()):
+        await message.channel.send("Here's a good link to check out: https://www.google.com/search?q=estee+lauder+tech&oq=google+job+search&aqs=chrome..69i57j0i20i263j0l3j0i395l2j69i60.4803j1j9&sourceid=chrome&ie=UTF-8&ibp=htl;jobs&sa=X&ved=2ahUKEwiR8paoosXuAhWpJjQIHRXQCQkQutcGKAB6BAgEEAQ&sxsrf=ALeKk003jUsHhe2flq8tzoIzfCFriVlLdw:1612065056085#fpstate=tldetail&htivrt=jobs&htichips=job_family_1:technician&htischips=job_family_1;technician&htilrad=96.5604&htidocid=uS8l_dmIOfT4oh0lAAAAAA%3D%3D")
+    if np.contains_jobmanage_traces(message.content.lower()):
+        await message.channel.send("Here are some helpful resources: https://basecamp.com/%22")
+    if np.contains_relationship_traces(message.content.lower()):
+        await message.channel.send("Relationships are complicated and are very precious. We might not be able to understand but ask for advice in the safespace discord server of therapists and kind folks: https://discord.gg/9g98gZ9H%22")
+    if np.contains_stress_traces(message.content.lower()):
+        response = np.get_stress_response()
+        await message.channel.send(response)
     await bot.process_commands(message)
 
 @bot.command(name='exercise', help='Suggests an activity that will make you get up and move!')
 async def offer_exercise(ctx):
     # pick an exercise
-    exercises=['Go for a walk!',"How about a run? Don't forget to stretch!",'Stand up, walk around, and streeeeetch!','Try some yoga!','Head outside and explore! The world is your oyster.','Try some pushups. Down, up 1!','Find some friends and throw a frisbee']
+    exercises=['Go for a walk! https://media.giphy.com/media/omHPYZttAVAAw/giphy.gif ',"How about a run? Don't forget to stretch! https://media.giphy.com/media/3oKIPavRPgJYaNI97W/giphy.gif ",'Stand up, walk around, and streeeeetch! https://media.giphy.com/media/8mvV5eUXkM18iCm5Eg/giphy.gif ','Try some yoga! https://media.giphy.com/media/H3SYd8rWzFXQrAWLNc/giphy.gif ','Head outside and explore! The world is your oyster.','Try some pushups. Down, up 1! https://media.giphy.com/media/3ohhwElB92YQv0igda/giphy.gif ','Find some friends and throw a frisbee',"Do nothing for 15 seconds https://cdn.lowgif.com/full/65353ed76bf13aa5-digital-icon-pack-clock-gif-by-seth-eckert-motion.gif "]
     response = random.choice(exercises)
     await ctx.send(response)
 
@@ -97,7 +109,7 @@ def findPlaces(lat, lng, tag, radius=4000, pagetoken = None):
 
    # return pagetoken
 
-@bot.command(name='sendACompliment', help='Send a compliment to another user!')
+@bot.command(name='compliment', help="Feeling down? You're the best! Type !compliment")
 async def offer_park(ctx):
     compliments = ['You are more fun than bubble wrap',
     'You are the most perfect you there is.',
