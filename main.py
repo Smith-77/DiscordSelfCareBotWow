@@ -1,6 +1,7 @@
 # bot.py
 import os
 import random
+import privateMethods.negative_patterns as np
 from dotenv import load_dotenv
 
 # 1
@@ -16,19 +17,19 @@ bot = commands.Bot(command_prefix='!')
 async def on_ready():
     print(f'{bot.user.name} has connected to Discord!')
 
-@bot.command(name='exercise', hep='Suggests an activity that will make you get up and move!')
-async def offer_exercise(ctx):
-    exercises=['walk','run','stretch','yoga']
-    response = random.choice(exercises)
-    await ctx.send(response)
-
 @bot.event
 async def on_message(message):
     if message.author == bot.user:
         return
-    elif 'depression' in message.content.lower():
-        response = "No"
+    elif np.contains_depression_traces(message.content.lower()):
+        response = np.get_depression_response()
         await message.channel.send(response)
     await bot.process_commands(message)
+
+@bot.command(name='exercise', help='Suggests an activity that will make you get up and move!')
+async def offer_exercise(ctx):
+    exercises=['walk','run','stretch','yoga']
+    response = random.choice(exercises)
+    await ctx.send(response)
 
 bot.run(TOKEN)
