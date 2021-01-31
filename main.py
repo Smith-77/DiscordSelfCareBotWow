@@ -35,4 +35,11 @@ async def offer_exercise(ctx):
     response = random.choice(exercises)
     await ctx.send(response)
 
+@bot.command(name='findParks', help='Suggests a local park to exercise in!')
+async def offer_park(ctx, location):
+    gmaps = googlemaps.Client(key="AIzaSyBAe9LcHsZWFsVrKi5VSZRekrIqxLtv5Ug")
+    local_park = gmaps.local_search('park near ' + location)
+    park_name = local_park['responseData']['results'][0]['titleNoFormatting']
+    await ctx.send(park_name)
+
 bot.run(TOKEN)
