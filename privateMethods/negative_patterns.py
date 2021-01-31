@@ -3,7 +3,7 @@ import random
 
 stress_keywords = ['stress','anxiety','anxious','stressed','tired', 'scared', 'afraid', 'fear','need help','need support']
 depression_keywords = ['end my life','depression','anxiety','anxious','depressed','I want to die','self harm','cut myself',"I don't wnat to live",'sad','mental health','suicide','kill myself']
-school_keywords = ['school','homework','test','quiz','paper']
+school_keywords = ['school','homework','test','quiz','paper','subject']
 
 gifs = ['https://media.discordapp.net/attachments/803257943645880323/805302433390788648/giphy_5.gif',
     'https://cdn.discordapp.com/attachments/805132413146759170/805461686479093780/giphy_24.gif',
@@ -27,6 +27,8 @@ def contains_depression_traces(message_content):
     sentiment_dict = sentiment_analyzer.polarity_scores(message_content)
     negative_sentiment = sentiment_dict['neg']
     positive_sentiment = sentiment_dict['pos']
+    if negative_sentiment > .93:
+        return True
     message_is_depressing = negative_sentiment > .75 or (negative_sentiment > .5 and positive_sentiment < .5)
     for word in depression_keywords:
         if word in message_content :
@@ -44,7 +46,9 @@ def contains_stress_traces(message_content):
     sentiment_dict = sentiment_analyzer.polarity_scores(message_content)
     negative_sentiment = sentiment_dict['neg']
     positive_sentiment = sentiment_dict['pos']
-    message_is_stressed = negative_sentiment > .75 or (negative_sentiment > .6 and positive_sentiment < .4)
+    print(negative_sentiment)
+    print(positive_sentiment)
+    message_is_stressed = negative_sentiment > .75 or (negative_sentiment > .5 and positive_sentiment < .5)
     for word in stress_keywords:
         if word in message_content :
             return message_is_stressed
@@ -95,7 +99,7 @@ def contains_relationship_traces(message_content):
     sentiment_dict = sentiment_analyzer.polarity_scores(message_content)
     negative_sentiment = sentiment_dict['neg']
     positive_sentiment = sentiment_dict['pos']
-    message_has_stress = negative_sentiment > .5 and positive_sentiment < .25
+    message_has_stress = negative_sentiment > .25 and positive_sentiment < .25
     for word in relationship_keywords:
         if word in message_content and message_has_stress:
             return True
