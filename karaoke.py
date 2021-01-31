@@ -65,7 +65,7 @@ async def on_member_join(member):
 
 @bot.command(name='hello', help='This command returns a random welcome message')
 async def hello(ctx):
-    responses = ['Hello, ready to get on with your day?', '**Ugh**, get on with the demo', 'Top of the morning to you', '**Wasssuup!**']
+    responses = ['Hello, ready to get on with your day?', 'Top of the morning to you', '**Wasssuup!**']
     await ctx.send(choice(responses))
 
 
@@ -142,8 +142,5 @@ async def stop(ctx):
 
     voice_channel.stop()
 
-@tasks.loop(seconds=20)
-async def change_status():
-    await bot.change_presence(activity=discord.Game(choice(status)))
 
 bot.run('ODA1MTI0NjAyNzE5NjMzNDk4.YBWUtw.Hay-bE8GFhW3getc4FxRAnOGO90')
