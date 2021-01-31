@@ -3,6 +3,8 @@ import os
 import random
 import privateMethods.negative_patterns as np
 from dotenv import load_dotenv
+import googlemaps
+from datetime import datetime
 
 # 1
 from discord.ext import commands
@@ -28,6 +30,7 @@ async def on_message(message):
 
 @bot.command(name='exercise', help='Suggests an activity that will make you get up and move!')
 async def offer_exercise(ctx):
+    # pick an exercise
     exercises=['walk','run','stretch','yoga']
     response = random.choice(exercises)
     await ctx.send(response)
